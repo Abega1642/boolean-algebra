@@ -1,23 +1,28 @@
 import re
 import itertools
-
-def boolean_value(val) :
-    return 1 if val == True else 0
+from tools import boolean_value, negation_form, assign_variables
     
-def assign_variables(variables, values):
-    return {var: val for var, val in zip(variables, values)}
+
 
 def logical_function_boolean_value(logical_function_input, variables):
     for var, val in variables.items():
-        logical_function_input = re.sub(r'\bnot_{}\b'.format(re.escape(var)), 'not {}'.format(var), logical_function_input)
-        logical_function_input = re.sub(r'\bnot\s+{}'.format(re.escape(var)), 'not {}'.format(var), logical_function_input)
-        logical_function_input = re.sub(r'\b{}\b'.format(re.escape(var)), str(val), logical_function_input)
+        logical_function_input = re.sub(
+            r'\bnot_{}\b'.format(re.escape(var)),
+            'not {}'.format(var),
+            logical_function_input
+        )
+        logical_function_input = re.sub(
+            r'\bnot\s+{}'.format(re.escape(var)),
+            'not {}'.format(var),
+            logical_function_input
+        )
+        logical_function_input = re.sub(
+            r'\b{}\b'.format(re.escape(var)),
+            str(val), logical_function_input
+        )
+
     return boolean_value(eval(logical_function_input))
 
-def negation_form(expression) :
-    expression = expression.split("*")
-    expression = [f"(not {e})" if len(e) == 1 else e[len(e) - 2] for e in expression]
-    return " + ".join(expression)
 
 def first_canonic_form_function(values, result,variables) :
     expression = []
@@ -45,11 +50,11 @@ def possible_values(variables_number):
     return list(itertools.product([1, 0], repeat=variables_number))
 
 def table_of_truth() :
-    variables_number = int(input("\nHow many variables is your function ?  → "))
+    variables_number = int(input("\nPlease enter the number of variable of your logical function ?  → "))
 
     variables = []
     for i in range(variables_number):
-        nom_variable = input(f"Please, enter the variable number {i+1}: ").strip()
+        nom_variable = input(f"Please, enter the name of the variable number {i+1}: ").strip()
         variables.append(nom_variable)
 
     logical_function_input = input(
@@ -79,5 +84,13 @@ def table_of_truth() :
     first_canonic_form = " + ".join(first_canonic_form)
     second_canonic_form = " * ".join(second_canonic_form)
     
-    print(f'\n==> The first canonic form of the logical function is : f({",".join(variables)}) = : {first_canonic_form}')
-    print(f'\n==> The second canonic form of the logical function is f({",".join(variables)}) = : {second_canonic_form}\n')
+    print(
+        '\n==> The first canonic form of the logical function is : f({}) = : {}'
+        .format(",".join(variables), first_canonic_form)
+    )
+
+    print(
+        '\n==> The second canonic form of the logical function is f({}) = : {}\n'
+        .format(",".join(variables), second_canonic_form)
+    )
+table_of_truth()
