@@ -1,5 +1,5 @@
 import re
-from tools import boolean_value, negation_form, assign_variables
+from utils.tools import boolean_value, negation_form, assign_variables
 
 
 def code_gray(a):
