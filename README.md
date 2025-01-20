@@ -12,8 +12,8 @@ The programs are written in `PYTHON (v3.11)`.
 ## Structures :
 
     ├── algos-description/
-    │   ├── karnaugh_table.txt
-    │   ├── truth_table.txt
+    │   ├── karnaugh_table.md
+    │   ├── truth_table.md
     ├── tools/
     │   ├── utils/
     │   │   ├── tools.py
